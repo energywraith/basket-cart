@@ -40,6 +40,9 @@ export const appMachine = createMachine(
           SKIP_STEP: {
             target: "shipping.skipped",
           },
+          PREVIOUS_STEP: {
+            target: "cart",
+          },
         },
       },
       shipping: {

@@ -1,16 +1,12 @@
 "use client";
 
-import { AppContext } from "@/context/AppMachineContext";
+// State = cart
+
+import { useAppMachine } from "@/context/AppMachineContext";
+import Link from "next/link";
 
 export default function Home() {
-  const actor = AppContext.useActorRef();
-  const appContext = AppContext.useSelector((state) => state);
-
-  const onCart = () => {
-    actor.send({
-      type: "PROCEED_TO_ADDRESSED",
-    });
-  };
+  const { actor, state } = useAppMachine();
 
   const onAdd = () => {
     actor.send({
@@ -20,16 +16,15 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>State: {appContext.value as string}</h1>
-      <ul>
-        {appContext.context.products.map((product, index) => (
+    <main className="flex min-h-screen flex-col items-center p-24">
+      <ul className="my-auto">
+        {state.context.products.map((product, index) => (
           <li key={index}>{product}</li>
         ))}
       </ul>
-      <section className="flex flex-col gap-y-2">
+      <section className="flex flex-col items-center gap-y-2 mt-auto">
         <button onClick={onAdd}>Add Product</button>
-        <button onClick={onCart}>Proceed to Addressed</button>
+        <Link href="/address">Next Step</Link>
       </section>
     </main>
   );
