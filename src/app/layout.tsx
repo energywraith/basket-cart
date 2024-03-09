@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppMachineProvider } from "@/context/AppMachineContext";
+import { CartHeader } from "@/components/templates/CartHeader";
+import { classNames } from "@/utils/classnames";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <AppMachineProvider>{children}</AppMachineProvider>
+      <body
+        className={classNames(inter.className, "mx-auto max-w-screen-lg px-4")}
+      >
+        <AppMachineProvider>
+          <CartHeader />
+          {children}
+        </AppMachineProvider>
       </body>
     </html>
   );
