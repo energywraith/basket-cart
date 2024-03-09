@@ -21,17 +21,64 @@ export const appMachine = createMachine(
       ADD_PRODUCT: {
         actions: "addProduct",
       },
-      PROCEED_TO_ADDRESSED: {
-        target: ".addressed",
-      },
     },
     states: {
-      cart: {},
-      addressed: {},
-      shippingSelected: {},
-      shippingSkipped: {},
-      paymentSelected: {},
-      paymentSkipped: {},
+      cart: {
+        on: {
+          NEXT_STEP: {
+            target: "addressed",
+            // TODO: Assign Address
+          },
+        },
+      },
+      addressed: {
+        on: {
+          NEXT_STEP: {
+            target: "shipping.selected",
+            // TODO: Assign Shipping Method
+          },
+          SKIP_STEP: {
+            target: "shipping.skipped",
+          },
+        },
+      },
+      shipping: {
+        initial: "skipped",
+        states: {
+          selected: {},
+          skipped: {},
+          hist: {
+            type: "history",
+          },
+        },
+        on: {
+          NEXT_STEP: {
+            target: "payment.selected",
+            // TODO: Assign Payment Method
+          },
+          SKIP_STEP: {
+            target: "payment.skipped",
+          },
+          PREVIOUS_STEP: {
+            target: "addressed",
+          },
+        },
+      },
+      payment: {
+        initial: "skipped",
+        states: {
+          selected: {},
+          skipped: {},
+        },
+        on: {
+          NEXT_STEP: {
+            target: "completed",
+          },
+          PREVIOUS_STEP: {
+            target: "shipping.hist",
+          },
+        },
+      },
       completed: {},
     },
   },
