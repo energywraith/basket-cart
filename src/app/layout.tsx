@@ -19,12 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={classNames(inter.className, "mx-auto max-w-screen-lg px-4")}
-      >
+      <body className={classNames(inter.className, "bg-slate-200")}>
         <AppMachineProvider>
           <CartHeader />
-          {children}
+          <main className="mx-auto max-w-screen-xl px-6 flex min-h-screen flex-col gap-4 items-center py-12">
+            {children}
+          </main>
         </AppMachineProvider>
       </body>
     </html>

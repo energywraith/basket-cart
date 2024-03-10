@@ -21,13 +21,15 @@ const CartHeader = () => {
   };
 
   return (
-    <nav className="flex flex-col items-center py-6">
-      <CartStepper
-        steps={steps}
-        activeStep={pathname}
-        onCompletedClick={onCompletedStepClick}
-      />
-    </nav>
+    <header className="bg-white">
+      <nav className="mx-auto max-w-screen-xl p-6">
+        <CartStepper
+          steps={steps}
+          activeStep={pathname}
+          onCompletedClick={onCompletedStepClick}
+        />
+      </nav>
+    </header>
   );
 };
 
