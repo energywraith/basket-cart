@@ -11,4 +11,11 @@ export const appMachineActions: ActionFunctionMap<
       products: [...context.products, event.product],
     };
   }),
+  deleteProduct: assign(({ context, event }) => {
+    return {
+      products: context.products.filter(
+        (product) => product.id !== event.productId
+      ),
+    };
+  }),
 };

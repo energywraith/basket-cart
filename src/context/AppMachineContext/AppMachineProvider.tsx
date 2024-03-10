@@ -21,6 +21,9 @@ export const appMachine = createMachine(
       ADD_PRODUCT: {
         actions: "addProduct",
       },
+      DELETE_PRODUCT: {
+        actions: "deleteProduct",
+      },
     },
     states: {
       cart: {
