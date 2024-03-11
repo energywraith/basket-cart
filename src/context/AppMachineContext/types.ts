@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
+  delivery: boolean;
 }
 
 export interface AppMachineContext {

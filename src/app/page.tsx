@@ -7,19 +7,20 @@ import { Card } from "@/components/common/Card";
 import { CartItem } from "@/components/templates/CartItem";
 
 import { useAppMachine } from "@/context/AppMachineContext";
-import Link from "next/link";
-import { classNames } from "@/utils/classnames";
+import { CartForm } from "@/components/templates/CartForm";
+import { Link } from "@/components/common/Link";
+import { Product } from "@/context/AppMachineContext/types";
+import { formatPrice } from "@/utils/formatters";
 
 export default function Home() {
   const { actor, state } = useAppMachine();
 
-  const onAdd = () => {
+  const onAdd = (product: Product) => {
     actor.send({
       type: "ADD_PRODUCT",
       product: {
+        ...product,
         id: uuidv4(),
-        name: `Product ${Math.floor(Math.random() * (50 - 2) + 1)}`,
-        price: 7.92,
       },
     });
   };
@@ -45,14 +46,8 @@ export default function Home() {
           )}
           <Card className="flex flex-col gap-y-4">
             <Card.Header as="h3">Add Product</Card.Header>
-            <h4>Form</h4>
+            <CartForm onSubmit={onAdd} />
           </Card>
-          <button
-            onClick={onAdd}
-            className="w-full bg-blue-600 text-white p-2 rounded-sm text-center"
-          >
-            Add product
-          </button>
         </section>
         <Card
           as="aside"
@@ -62,20 +57,18 @@ export default function Home() {
           <h4 className="flex items-end justify-between text-sm">
             Total price
             <span className="text-2xl font-medium">
-              {`${state.context.products
-                .reduce((acc, product) => acc + product.price, 0)
-                .toFixed(2)} `}
-              zł
+              {formatPrice(
+                state.context.products.reduce(
+                  (acc, product) => acc + product.price,
+                  0
+                )
+              )}
             </span>
           </h4>
           <Link
             href="/address"
-            className={classNames(
-              "w-full text-white p-2 rounded-sm text-center mt-2",
-              state.context.products.length === 0
-                ? "bg-neutral-300 pointer-events-none"
-                : "bg-blue-600"
-            )}
+            className="mt-2"
+            disabled={state.context.products.length === 0}
           >
             Proceed to checkout
           </Link>
