@@ -3,15 +3,40 @@ import { Link } from "@/components/common/Link";
 import { useAppMachine } from "@/context/AppMachineContext";
 import { formatPrice } from "@/utils/formatters";
 
-const CartSummary = () => {
+interface CartSummaryProps {
+  showCartItems?: boolean;
+  proceedTo: string;
+  proceedText: string;
+  isProceedDisabled?: boolean;
+}
+
+const CartSummary = ({
+  showCartItems,
+  proceedTo,
+  proceedText,
+  isProceedDisabled,
+}: CartSummaryProps) => {
   const { state } = useAppMachine();
 
   return (
     <Card
       as="aside"
-      className="h-fit flex flex-col justify-center w-full max-w-sm gap-y-4 relative"
+      className="h-fit flex flex-col justify-center w-full md:max-w-sm gap-y-4 relative"
     >
       <Card.Header as="h3">Summary</Card.Header>
+      {showCartItems && (
+        <>
+          <ul>
+            {state.context.products.map((product) => (
+              <li key={product.id} className="flex justify-between">
+                {product.name}
+                <span>{formatPrice(product.price)}</span>
+              </li>
+            ))}
+          </ul>
+          <hr />
+        </>
+      )}
       <h4 className="flex items-end justify-between text-sm">
         Total price
         <span className="text-2xl font-medium">
@@ -23,12 +48,8 @@ const CartSummary = () => {
           )}
         </span>
       </h4>
-      <Link
-        href="/address"
-        className="mt-2"
-        disabled={state.context.products.length === 0}
-      >
-        Proceed to checkout
+      <Link href={proceedTo} className="mt-2" disabled={isProceedDisabled}>
+        {proceedText}
       </Link>
     </Card>
   );

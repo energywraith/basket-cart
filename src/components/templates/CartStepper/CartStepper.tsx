@@ -14,7 +14,7 @@ const CartStepper = ({
   const stepKeys = Object.keys(steps);
 
   return (
-    <ol className="flex justify-center gap-x-2 items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+    <ol className="flex justify-center gap-x-2 items-center w-full text-sm font-medium text-center text-gray-500 md:text-base">
       {stepKeys.map((step, index) => {
         const isCompleted = index < stepKeys.indexOf(activeStep);
 
