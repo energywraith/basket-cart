@@ -2,6 +2,8 @@
 
 import { Form } from "@/components/common/Form";
 import { Product } from "@/context/AppMachineContext/types";
+import { FieldValues } from "react-hook-form";
+import { ObjectSchema, number, object, string } from "yup";
 
 interface CartFormProps {
   onSubmit: (product: Product) => void;
@@ -12,36 +14,42 @@ const delivery = {
   NO: false,
 };
 
-const CartForm = ({ onSubmit }: CartFormProps) => {
-  const fields = [
-    {
-      label: "Name",
-      name: "name",
-      type: "text",
-    },
-    {
-      label: "Price",
-      name: "price",
-      type: "number",
-    },
-    {
-      label: "Require Delivery",
-      name: "delivery",
-      type: "radio",
-      defaultValue: "true",
-      options: [
-        {
-          label: "Yes",
-          value: "YES",
-        },
-        {
-          label: "No",
-          value: "NO",
-        },
-      ],
-    },
-  ];
+const fields = [
+  {
+    label: "Name",
+    name: "name",
+    type: "text",
+  },
+  {
+    label: "Price",
+    name: "price",
+    type: "number",
+  },
+  {
+    label: "Require Delivery",
+    name: "delivery",
+    type: "radio",
+    defaultValue: "true",
+    options: [
+      {
+        label: "Yes",
+        value: "YES",
+      },
+      {
+        label: "No",
+        value: "NO",
+      },
+    ],
+  },
+];
 
+const schema: ObjectSchema<FieldValues> = object({
+  name: string().defined().max(20).required(),
+  price: number().defined().positive().required(),
+  delivery: string().defined().oneOf(Object.keys(delivery)).required(),
+});
+
+const CartForm = ({ onSubmit }: CartFormProps) => {
   const handleSubmit = (data: any) => {
     onSubmit({
       ...data,
@@ -50,7 +58,14 @@ const CartForm = ({ onSubmit }: CartFormProps) => {
     });
   };
 
-  return <Form fields={fields} onSubmit={handleSubmit} submitText="Add" />;
+  return (
+    <Form
+      fields={fields}
+      schema={schema}
+      onSubmit={handleSubmit}
+      submitText="Add"
+    />
+  );
 };
 
 export { CartForm };
