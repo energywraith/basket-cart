@@ -16,6 +16,7 @@ export const appMachine = createMachine(
     },
     context: {
       products: [],
+      address: null,
     },
     on: {
       ADD_PRODUCT: {
@@ -23,6 +24,9 @@ export const appMachine = createMachine(
       },
       DELETE_PRODUCT: {
         actions: "deleteProduct",
+      },
+      SET_ADDRESS: {
+        actions: "setAddress",
       },
     },
     states: {

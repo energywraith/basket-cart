@@ -18,4 +18,9 @@ export const appMachineActions: ActionFunctionMap<
       ),
     };
   }),
+  setAddress: assign(({ event }) => {
+    return {
+      address: event.address,
+    };
+  }),
 };

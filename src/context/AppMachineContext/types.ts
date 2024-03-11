@@ -5,8 +5,15 @@ export interface Product {
   delivery: boolean;
 }
 
+export interface Address {
+  country: string;
+  street: string;
+  city: string;
+}
+
 export interface AppMachineContext {
   products: Product[];
+  address: Address | null;
 }
 
 export type AppMachineActions =
@@ -17,4 +24,8 @@ export type AppMachineActions =
   | {
       type: "deleteProduct";
       productId: string;
+    }
+  | {
+      type: "setAddress";
+      address: Address;
     };
