@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/common/Button";
 import { Form } from "@/components/common/Form";
+import { countries } from "@/consts";
 import { useAppMachine } from "@/context/AppMachineContext";
 import { Address } from "@/context/AppMachineContext/types";
 import { FieldValues } from "react-hook-form";
@@ -13,7 +14,10 @@ interface AddressFormProps {
 }
 
 const schema: ObjectSchema<FieldValues> = object({
-  country: string().defined().max(20).required(),
+  country: string()
+    .oneOf(countries.map((country) => country.value))
+    .defined()
+    .required(),
   street: string().defined().max(20).required(),
   city: string().defined().max(20).required(),
 });
@@ -25,8 +29,9 @@ const AddressForm = ({ onCancel, onSubmit }: AddressFormProps) => {
     {
       label: "Country",
       name: "country",
-      type: "text",
-      defaultValue: state.context.address?.country,
+      type: "select",
+      options: countries,
+      defaultValue: state.context.address?.country || countries[0].value,
     },
     {
       label: "Street",
