@@ -5,8 +5,14 @@ import { Product } from "@/context/AppMachineContext/types";
 import { FieldValues } from "react-hook-form";
 import { ObjectSchema, number, object, string } from "yup";
 
+interface CartFormData {
+  name: string;
+  price: string;
+  delivery: keyof typeof delivery;
+}
+
 interface CartFormProps {
-  onSubmit: (product: Product) => void;
+  onSubmit: (product: Omit<Product, "id">) => void;
 }
 
 const delivery = {
@@ -50,7 +56,7 @@ const schema: ObjectSchema<FieldValues> = object({
 });
 
 const CartForm = ({ onSubmit }: CartFormProps) => {
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: CartFormData) => {
     onSubmit({
       ...data,
       price: +data.price,
