@@ -6,7 +6,7 @@ export interface Product {
 }
 
 export interface Address {
-  country: string;
+  country: "usa" | "pl";
   street: string;
   city: string;
 }
