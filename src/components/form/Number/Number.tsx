@@ -1,5 +1,10 @@
-import { Input } from "../Input";
+import { forwardRef } from "react";
+import { Input, InputProps } from "../Input";
 
-const Number = ({ ...props }) => <Input {...props} step="0.01" />;
+const Number = forwardRef<HTMLInputElement, InputProps>(({ ...props }, ref) => (
+  <Input {...props} ref={ref} step="0.01" />
+));
+
+Number.displayName = "Number";
 
 export { Number };

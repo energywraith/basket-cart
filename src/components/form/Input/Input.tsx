@@ -1,7 +1,7 @@
 import { classNames } from "@/utils/classnames";
 import { HTMLProps, forwardRef } from "react";
 
-interface InputProps extends HTMLProps<HTMLInputElement> {
+export interface InputProps extends HTMLProps<HTMLInputElement> {
   isInvalid?: boolean;
 }
 

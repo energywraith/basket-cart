@@ -11,13 +11,14 @@ interface InputProps extends HTMLProps<HTMLInputElement> {
 }
 
 const Radio = forwardRef<HTMLInputElement, InputProps>(
-  ({ isInvalid, ...props }) => {
+  ({ isInvalid, ...props }, ref) => {
     return (
       <div className="flex self-start gap-x-4">
         {props.options?.map((option) => (
           <label key={option.value} className="flex gap-x-2">
             <input
               {...props}
+              ref={ref}
               type="radio"
               value={option.value}
               checked={props.value === option.value}
