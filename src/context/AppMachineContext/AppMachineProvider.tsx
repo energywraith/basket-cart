@@ -42,7 +42,6 @@ export const appMachine = createMachine(
         on: {
           NEXT_STEP: {
             target: "addressed",
-            // TODO: Assign Address
           },
         },
       },
@@ -50,7 +49,6 @@ export const appMachine = createMachine(
         on: {
           NEXT_STEP: {
             target: "shipping.selected",
-            // TODO: Assign Shipping Method
           },
           SKIP_STEP: {
             target: "shipping.skipped",
@@ -72,7 +70,6 @@ export const appMachine = createMachine(
         on: {
           NEXT_STEP: {
             target: "payment.selected",
-            // TODO: Assign Payment Method
           },
           SKIP_STEP: {
             target: "payment.skipped",

@@ -7,10 +7,9 @@ export const useAppMachine = () => {
   const state = AppContext.useSelector((state) => state);
 
   const states = {
-    goNext: (args?: { [key: string]: any }) => {
+    goNext: () => {
       actor.send({
         type: "NEXT_STEP",
-        ...args,
       });
     },
     skipStep: () => {

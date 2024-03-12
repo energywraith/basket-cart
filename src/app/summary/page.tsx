@@ -13,7 +13,7 @@ import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
 
 export default function Summary() {
-  const { state } = useAppMachine();
+  const { state, states } = useAppMachine();
   const router = useRouter();
 
   const onProcessCompleteWithData = onProcessComplete.bind(null, state.context);
@@ -21,10 +21,9 @@ export default function Summary() {
   const onCompleteOrder = async () => {
     const response = await onProcessCompleteWithData();
 
-    console.log(response);
-
     if (response.success) {
       router.push("/completed");
+      states.goNext();
     }
   };
 

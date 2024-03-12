@@ -9,6 +9,7 @@ interface CartSummaryProps {
   proceedTo?: string;
   proceedText?: string;
   isProceedDisabled?: boolean;
+  changeStepOnProceed?: boolean;
   actions?: ReactNode;
 }
 
@@ -17,9 +18,10 @@ const CartSummary = ({
   proceedTo,
   proceedText,
   isProceedDisabled,
+  changeStepOnProceed,
   actions,
 }: CartSummaryProps) => {
-  const { state } = useAppMachine();
+  const { state, states } = useAppMachine();
 
   return (
     <Card
@@ -52,7 +54,12 @@ const CartSummary = ({
         </span>
       </h4>
       {proceedTo && (
-        <Link href={proceedTo} className="mt-2" disabled={isProceedDisabled}>
+        <Link
+          href={proceedTo}
+          className="mt-2"
+          disabled={isProceedDisabled}
+          onClick={changeStepOnProceed ? states.goNext : undefined}
+        >
           {proceedText}
         </Link>
       )}

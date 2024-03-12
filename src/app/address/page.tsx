@@ -47,6 +47,7 @@ export default function Address() {
           <CartSummary
             proceedTo="shipment"
             proceedText="Proceed to shipping"
+            changeStepOnProceed
             isProceedDisabled={!address || showForm}
             showCartItems
           />

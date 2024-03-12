@@ -15,7 +15,7 @@ import { useState } from "react";
 // State = shipping.selected | shipping.skipped
 
 export default function Payment() {
-  const { state, actor } = useAppMachine();
+  const { state, actor, states } = useAppMachine();
 
   const [showForm, setShowForm] = useState(false);
 
@@ -44,7 +44,12 @@ export default function Payment() {
                   onSubmit={onSubmit}
                 />
               </Card>
-              <Link variant="text" href="summary" className="self-center">
+              <Link
+                variant="text"
+                href="summary"
+                className="self-center"
+                onClick={states.skipStep}
+              >
                 Skip Payment Method
               </Link>
             </>
@@ -57,6 +62,7 @@ export default function Payment() {
             proceedTo="summary"
             proceedText="Proceed to summary"
             isProceedDisabled={!paymentMethod}
+            changeStepOnProceed
             showCartItems
           />
           <AddressSummary />

@@ -13,7 +13,7 @@ import { useState } from "react";
 // State = addressed
 
 export default function Shipment() {
-  const { state, actor } = useAppMachine();
+  const { state, actor, states } = useAppMachine();
 
   const [showForm, setShowForm] = useState(false);
 
@@ -42,7 +42,12 @@ export default function Shipment() {
                   onSubmit={onSubmit}
                 />
               </Card>
-              <Link variant="text" href="payment" className="self-center">
+              <Link
+                variant="text"
+                href="payment"
+                className="self-center"
+                onClick={states.skipStep}
+              >
                 Skip Shipping Method
               </Link>
             </>
@@ -56,6 +61,7 @@ export default function Shipment() {
             proceedText="Proceed to payment"
             isProceedDisabled={!shippingMethod}
             showCartItems
+            changeStepOnProceed
           />
           <AddressSummary />
         </section>
