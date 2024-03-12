@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppMachineProvider } from "@/context/AppMachineContext";
 import { CartHeader } from "@/components/templates/CartHeader";
 import { classNames } from "@/utils/classnames";
+import { RouteGuardProvider } from "@/components/templates/RouteGuardProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={classNames(inter.className, "bg-slate-200")}>
         <AppMachineProvider>
-          <CartHeader />
-          <main className="mx-auto max-w-screen-xl px-6 flex min-h-screen flex-col gap-4 items-center py-12">
-            {children}
-          </main>
+          <RouteGuardProvider>
+            <CartHeader />
+            <main className="mx-auto max-w-screen-xl px-6 flex min-h-screen flex-col gap-4 items-center py-12">
+              {children}
+            </main>
+          </RouteGuardProvider>
         </AppMachineProvider>
       </body>
     </html>

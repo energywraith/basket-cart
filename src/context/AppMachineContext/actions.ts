@@ -1,4 +1,4 @@
-import { ActionFunctionMap, ProvidedActor, assign } from "xstate";
+import { ActionFunctionMap, ProvidedActor, assign, sendTo } from "xstate";
 import { AppMachineActions, AppMachineContext } from "./types";
 
 export const appMachineActions: ActionFunctionMap<
