@@ -2,7 +2,7 @@
 
 import { createActorContext } from "@xstate/react";
 import { PropsWithChildren } from "react";
-import { createMachine } from "xstate";
+import { and, createMachine } from "xstate";
 import { appMachineActions } from "./actions";
 import { AppMachineContext, AppMachineActions } from "./types";
 
@@ -42,7 +42,7 @@ export const appMachine = createMachine(
         on: {
           NEXT_STEP: {
             target: "addressed",
-            guard: "isAddressValid",
+            guard: and(["isAddressValid", "hasProducts"]),
           },
         },
       },
@@ -105,6 +105,9 @@ export const appMachine = createMachine(
     guards: {
       isAddressValid: ({ context }) => {
         return !!context.address;
+      },
+      hasProducts: ({ context }) => {
+        return context.products.length > 0;
       },
     },
   }
