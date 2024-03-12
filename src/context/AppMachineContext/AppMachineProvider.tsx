@@ -42,6 +42,7 @@ export const appMachine = createMachine(
         on: {
           NEXT_STEP: {
             target: "addressed",
+            guard: "isAddressValid",
           },
         },
       },
@@ -101,6 +102,11 @@ export const appMachine = createMachine(
   },
   {
     actions: appMachineActions,
+    guards: {
+      isAddressValid: ({ context }) => {
+        return !!context.address;
+      },
+    },
   }
 );
 
