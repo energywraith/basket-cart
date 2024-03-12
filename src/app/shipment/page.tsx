@@ -17,6 +17,15 @@ export default function Shipment() {
 
   const [showForm, setShowForm] = useState(false);
 
+  const onSkip = () => {
+    actor.send({
+      type: "SET_SHIPPING_METHOD",
+      shipinngMethod: null,
+    });
+
+    states.skipStep();
+  };
+
   const onSubmit = (shippingMethod: ShippingMethod) => {
     actor.send({
       type: "SET_SHIPPING_METHOD",
@@ -46,7 +55,7 @@ export default function Shipment() {
                 variant="text"
                 href="payment"
                 className="self-center"
-                onClick={states.skipStep}
+                onClick={onSkip}
               >
                 Skip Shipping Method
               </Link>

@@ -19,6 +19,15 @@ export default function Payment() {
 
   const [showForm, setShowForm] = useState(false);
 
+  const onSkip = () => {
+    actor.send({
+      type: "SET_PAYMENT_METHOD",
+      paymentMethod: null,
+    });
+
+    states.skipStep();
+  };
+
   const onSubmit = (paymentMethod: PaymentMethod) => {
     actor.send({
       type: "SET_PAYMENT_METHOD",
@@ -48,7 +57,7 @@ export default function Payment() {
                 variant="text"
                 href="summary"
                 className="self-center"
-                onClick={states.skipStep}
+                onClick={onSkip}
               >
                 Skip Payment Method
               </Link>
