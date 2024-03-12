@@ -1,26 +1,65 @@
 "use client";
 
+import { Card } from "@/components/common/Card";
+import { Link } from "@/components/common/Link";
+import { AddressSummary } from "@/components/templates/AddressSummary";
+import { CartSummary } from "@/components/templates/CartSummary";
+import { ShippingCard } from "@/components/templates/ShippingCard";
+import { ShippingForm } from "@/components/templates/ShippingForm";
+import { useAppMachine } from "@/context/AppMachineContext";
+import { ShippingMethod } from "@/context/AppMachineContext/types";
+import { useState } from "react";
+
 // State = addressed
 
-import { useAppMachine } from "@/context/AppMachineContext";
-import Link from "next/link";
+export default function Shipment() {
+  const { state, actor } = useAppMachine();
 
-export default function Address() {
-  const { states } = useAppMachine();
+  const [showForm, setShowForm] = useState(false);
+
+  const onSubmit = (shippingMethod: ShippingMethod) => {
+    actor.send({
+      type: "SET_SHIPPING_METHOD",
+      shippingMethod,
+    });
+
+    setShowForm(false);
+  };
+
+  const shippingMethod = state.context.shippingMethod;
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <section className="flex flex-col items-center gap-y-2 mt-auto">
-        <Link href="/payment" onClick={() => states.goNext()}>
-          Next Step
-        </Link>
-        <Link href="/payment" onClick={() => states.skipStep()}>
-          Skip Step
-        </Link>
-        <Link href="/address" onClick={() => states.goBack()}>
-          Back
-        </Link>
+    <>
+      <h1 className="self-start text-2xl font-medium">Shipping Methods</h1>
+      <section className="flex flex-col md:flex-row w-full gap-4">
+        <section className="flex-grow flex flex-col gap-4">
+          {!shippingMethod || showForm ? (
+            <>
+              <Card className="flex flex-col gap-y-4">
+                <Card.Header as="h2">Select Shipping Method</Card.Header>
+                <ShippingForm
+                  onCancel={showForm ? () => setShowForm(false) : undefined}
+                  onSubmit={onSubmit}
+                />
+              </Card>
+              <Link variant="text" href="payment" className="self-center">
+                Skip Shipping Method
+              </Link>
+            </>
+          ) : (
+            <ShippingCard onChangeShipping={() => setShowForm(true)} />
+          )}
+        </section>
+        <section className="flex flex-col w-full md:max-w-sm gap-y-4">
+          <CartSummary
+            proceedTo="payment"
+            proceedText="Proceed to payment"
+            isProceedDisabled={!shippingMethod}
+            showCartItems
+          />
+          <AddressSummary />
+        </section>
       </section>
-    </main>
+    </>
   );
 }

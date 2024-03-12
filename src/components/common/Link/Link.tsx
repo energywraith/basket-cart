@@ -6,15 +6,32 @@ interface LinkProps extends NextLinkProps {
   disabled?: boolean;
   children?: ReactNode;
   className?: string;
+  variant?: keyof typeof variants;
 }
 
-const Link = ({ children, disabled, className, ...props }: LinkProps) => {
+const variants = {
+  text: "text-blue-600",
+  solid: "w-full text-white p-2 rounded-sm text-center bg-blue-600",
+};
+
+const disabledVariants = {
+  text: "text-neutral-300",
+  solid: "bg-neutral-300 pointer-events-none",
+};
+
+const Link = ({
+  children,
+  disabled,
+  className,
+  variant = "solid",
+  ...props
+}: LinkProps) => {
   return (
     <NextLink
       {...props}
       className={classNames(
-        "w-full text-white p-2 rounded-sm text-center",
-        disabled ? "bg-neutral-300 pointer-events-none" : "bg-blue-600",
+        variants[variant],
+        disabled && disabledVariants[variant],
         className
       )}
     >
