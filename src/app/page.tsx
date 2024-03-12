@@ -47,11 +47,13 @@ export default function Home() {
             <CartForm onSubmit={onAdd} />
           </Card>
         </section>
-        <CartSummary
-          proceedTo="address"
-          proceedText="Proceed to checkout"
-          isProceedDisabled={state.context.products.length === 0}
-        />
+        <section className="flex flex-col w-full md:max-w-sm">
+          <CartSummary
+            proceedTo="address"
+            proceedText="Proceed to checkout"
+            isProceedDisabled={state.context.products.length === 0}
+          />
+        </section>
       </section>
     </>
   );

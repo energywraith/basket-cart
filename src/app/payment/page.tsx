@@ -20,8 +20,6 @@ export default function Payment() {
   const [showForm, setShowForm] = useState(false);
 
   const onSubmit = (paymentMethod: PaymentMethod) => {
-    console.log(paymentMethod);
-
     actor.send({
       type: "SET_PAYMENT_METHOD",
       paymentMethod,

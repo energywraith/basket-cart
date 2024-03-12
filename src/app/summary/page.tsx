@@ -1,23 +1,59 @@
 "use client";
 
+import { Card } from "@/components/common/Card";
 // State = payment.selected | payment.skipped
 
+import { AddressSummary } from "@/components/templates/AddressSummary";
+import { CartItem } from "@/components/templates/CartItem";
+import { CartSummary } from "@/components/templates/CartSummary";
+import { OrderDetailsSummary } from "@/components/templates/OrderDetailsSummary";
 import { useAppMachine } from "@/context/AppMachineContext";
-import Link from "next/link";
+import { onProcessComplete } from "../actions";
+import { Button } from "@/components/common/Button";
+import { useRouter } from "next/navigation";
 
-export default function Address() {
-  const { states } = useAppMachine();
+export default function Summary() {
+  const { state } = useAppMachine();
+  const router = useRouter();
+
+  const onProcessCompleteWithData = onProcessComplete.bind(null, state.context);
+
+  const onCompleteOrder = async () => {
+    const response = await onProcessCompleteWithData();
+
+    console.log(response);
+
+    if (response.success) {
+      router.push("/completed");
+    }
+  };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <section className="flex flex-col items-center gap-y-2 mt-auto">
-        <Link href="/completed" onClick={() => states.goNext()}>
-          Complete
-        </Link>
-        <Link href="/payment" onClick={() => states.goBack()}>
-          Back
-        </Link>
+    <>
+      <section className="flex flex-col md:flex-row w-full gap-4">
+        <section className="flex-grow flex flex-col gap-4">
+          <Card>
+            {state.context.products.length > 0 && (
+              <ul className="flex flex-col gap-4">
+                {state.context.products.map((product) => (
+                  <CartItem key={product.id} {...product} />
+                ))}
+              </ul>
+            )}
+          </Card>
+          <AddressSummary />
+          <OrderDetailsSummary />
+        </section>
+        <section className="flex flex-col w-full md:max-w-sm gap-y-4">
+          <CartSummary
+            actions={
+              <form action={onCompleteOrder} className="mt-2">
+                <Button>Complete order</Button>
+              </form>
+            }
+          />
+        </section>
       </section>
-    </main>
+    </>
   );
 }

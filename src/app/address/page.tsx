@@ -33,9 +33,7 @@ export default function Address() {
         <section className="flex-grow flex flex-col gap-4">
           {!address || showForm ? (
             <Card className="flex flex-col gap-y-4">
-              <Card.Header as="h2">
-                {(!address || showForm) && "Fill "}Address Details
-              </Card.Header>
+              <Card.Header as="h2">Address Details</Card.Header>
               <AddressForm
                 onCancel={showForm ? () => setShowForm(false) : undefined}
                 onSubmit={onFillAddress}
@@ -45,12 +43,14 @@ export default function Address() {
             <AddressCard onChangeAddress={() => setShowForm(true)} />
           )}
         </section>
-        <CartSummary
-          proceedTo="shipment"
-          proceedText="Proceed to shipping"
-          isProceedDisabled={!address || showForm}
-          showCartItems
-        />
+        <section className="flex flex-col w-full md:max-w-sm">
+          <CartSummary
+            proceedTo="shipment"
+            proceedText="Proceed to shipping"
+            isProceedDisabled={!address || showForm}
+            showCartItems
+          />
+        </section>
       </section>
     </>
   );

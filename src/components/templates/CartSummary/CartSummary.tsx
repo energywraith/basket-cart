@@ -2,12 +2,14 @@ import { Card } from "@/components/common/Card";
 import { Link } from "@/components/common/Link";
 import { useAppMachine } from "@/context/AppMachineContext";
 import { formatPrice } from "@/utils/formatters";
+import { ReactNode } from "react";
 
 interface CartSummaryProps {
   showCartItems?: boolean;
-  proceedTo: string;
-  proceedText: string;
+  proceedTo?: string;
+  proceedText?: string;
   isProceedDisabled?: boolean;
+  actions?: ReactNode;
 }
 
 const CartSummary = ({
@@ -15,13 +17,14 @@ const CartSummary = ({
   proceedTo,
   proceedText,
   isProceedDisabled,
+  actions,
 }: CartSummaryProps) => {
   const { state } = useAppMachine();
 
   return (
     <Card
       as="aside"
-      className="h-fit flex flex-col justify-center w-full md:max-w-sm gap-y-4 relative"
+      className="h-fit flex flex-col justify-center w-full gap-y-4"
     >
       <Card.Header as="h3">Summary</Card.Header>
       {showCartItems && (
@@ -48,9 +51,12 @@ const CartSummary = ({
           )}
         </span>
       </h4>
-      <Link href={proceedTo} className="mt-2" disabled={isProceedDisabled}>
-        {proceedText}
-      </Link>
+      {proceedTo && (
+        <Link href={proceedTo} className="mt-2" disabled={isProceedDisabled}>
+          {proceedText}
+        </Link>
+      )}
+      {actions}
     </Card>
   );
 };

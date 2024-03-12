@@ -13,6 +13,8 @@ const CartStepper = ({
 }: CartStepperProps) => {
   const stepKeys = Object.keys(steps);
 
+  const isProcessFinished = activeStep === stepKeys[stepKeys.length - 1];
+
   return (
     <ol className="flex justify-center gap-x-2 items-center w-full text-sm font-medium text-center text-gray-500 md:text-base">
       {stepKeys.map((step, index) => {
@@ -26,7 +28,11 @@ const CartStepper = ({
             isActive={index === stepKeys.indexOf(activeStep)}
             isLast={index === Object.keys(steps).length - 1}
             isCompleted={isCompleted}
-            onClick={isCompleted ? () => onCompletedClick(step) : undefined}
+            onClick={
+              isCompleted && !isProcessFinished
+                ? () => onCompletedClick(step)
+                : undefined
+            }
           />
         );
       })}

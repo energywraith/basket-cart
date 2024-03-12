@@ -5,7 +5,7 @@ import { Product } from "@/context/AppMachineContext/types";
 import { classNames } from "@/utils/classnames";
 
 interface CartItemProps extends Product {
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
 }
 
 const CartItem = ({ id, name, price, delivery, onDelete }: CartItemProps) => {
@@ -22,7 +22,9 @@ const CartItem = ({ id, name, price, delivery, onDelete }: CartItemProps) => {
         />
       </h3>
       <h4 className="text-xl font-medium">{price.toFixed(2)} zł</h4>
-      <TrashIcon className="w-5 h-5" onClick={() => onDelete(id)} />
+      {onDelete && (
+        <TrashIcon className="w-5 h-5" onClick={() => onDelete(id)} />
+      )}
     </Card>
   );
 };

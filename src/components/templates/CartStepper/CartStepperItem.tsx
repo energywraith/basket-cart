@@ -22,9 +22,8 @@ const CartStepperItem = ({
       className={classNames(
         "flex items-center",
         isActive && "text-blue-600",
-        isCompleted
-          ? "after:!border-gray-400 cursor-pointer"
-          : "pointer-events-none after:border-transparent",
+        isCompleted && onClick ? "cursor-pointer" : "pointer-events-none",
+        isCompleted ? "after:!border-gray-400" : "after:border-transparent",
         !isLast &&
           "md:w-full after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4"
       )}
