@@ -23,11 +23,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         )}
       >
         {options?.map((option) => (
-          <option
-            key={option.value}
-            selected={option.value === props.value}
-            value={option.value}
-          >
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
