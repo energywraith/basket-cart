@@ -11,9 +11,15 @@ export interface Address {
   city: string;
 }
 
+export type ShippingMethod = "DHLInternational" | "PP" | "USPS";
+
+export type PaymentMethod = "creditCard" | "applePay" | "blik";
+
 export interface AppMachineContext {
   products: Product[];
   address: Address | null;
+  shippingMethod: ShippingMethod | null;
+  paymentMethod: PaymentMethod | null;
 }
 
 export type AppMachineActions =
@@ -28,4 +34,12 @@ export type AppMachineActions =
   | {
       type: "setAddress";
       address: Address;
+    }
+  | {
+      type: "setShippingMethod";
+      address: ShippingMethod;
+    }
+  | {
+      type: "setPaymentMethod";
+      address: PaymentMethod;
     };

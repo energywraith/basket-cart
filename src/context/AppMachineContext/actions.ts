@@ -23,4 +23,14 @@ export const appMachineActions: ActionFunctionMap<
       address: event.address,
     };
   }),
+  setShippingMethod: assign(({ event }) => {
+    return {
+      shippingMethod: event.shippingMethod,
+    };
+  }),
+  setPaymentMethod: assign(({ event }) => {
+    return {
+      paymentMethod: event.paymentMethod,
+    };
+  }),
 };

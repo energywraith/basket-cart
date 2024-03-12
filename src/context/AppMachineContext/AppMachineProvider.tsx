@@ -17,6 +17,8 @@ export const appMachine = createMachine(
     context: {
       products: [],
       address: null,
+      shippingMethod: null,
+      paymentMethod: null,
     },
     on: {
       ADD_PRODUCT: {
@@ -27,6 +29,12 @@ export const appMachine = createMachine(
       },
       SET_ADDRESS: {
         actions: "setAddress",
+      },
+      SET_SHIPPING_METHOD: {
+        actions: "setShippingMethod",
+      },
+      SET_PAYMENT_METHOD: {
+        actions: "setPaymentMethod",
       },
     },
     states: {
