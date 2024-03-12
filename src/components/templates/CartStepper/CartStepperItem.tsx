@@ -7,7 +7,6 @@ interface CartStepperItemProps {
   isCompleted: boolean;
   isActive: boolean;
   isLast: boolean;
-  onClick?: () => void;
 }
 
 const CartStepperItem = ({
@@ -15,19 +14,16 @@ const CartStepperItem = ({
   isCompleted,
   isActive,
   isLast,
-  onClick,
 }: CartStepperItemProps) => {
   return (
     <li
       className={classNames(
-        "flex items-center",
+        "flex items-center pointer-events-none",
         isActive && "text-blue-600",
-        isCompleted && onClick ? "cursor-pointer" : "pointer-events-none",
         isCompleted ? "after:!border-gray-400" : "after:border-transparent",
         !isLast &&
           "md:w-full after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4"
       )}
-      onClick={onClick}
     >
       <span className="flex items-center">
         {isCompleted && (

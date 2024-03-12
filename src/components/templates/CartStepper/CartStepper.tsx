@@ -1,19 +1,13 @@
+import { Routes } from "@/consts";
 import { CartStepperItem } from "./CartStepperItem";
 
 interface CartStepperProps {
   activeStep: string;
-  steps: Record<string, string>;
-  onCompletedClick: (key: string) => void;
+  steps: Routes;
 }
 
-const CartStepper = ({
-  activeStep,
-  steps,
-  onCompletedClick,
-}: CartStepperProps) => {
+const CartStepper = ({ activeStep, steps }: CartStepperProps) => {
   const stepKeys = Object.keys(steps);
-
-  const isProcessFinished = activeStep === stepKeys[stepKeys.length - 1];
 
   return (
     <ol className="flex justify-center gap-x-2 items-center w-full text-sm font-medium text-center text-gray-500 md:text-base">
@@ -23,16 +17,11 @@ const CartStepper = ({
         return (
           <CartStepperItem
             key={index}
-            step={steps[step]}
+            step={steps[step].label}
             index={index}
             isActive={index === stepKeys.indexOf(activeStep)}
             isLast={index === Object.keys(steps).length - 1}
             isCompleted={isCompleted}
-            onClick={
-              isCompleted && !isProcessFinished
-                ? () => onCompletedClick(step)
-                : undefined
-            }
           />
         );
       })}
