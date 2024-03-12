@@ -1,7 +1,6 @@
 interface Route {
   label: string;
   states?: string[];
-  histState?: string;
 }
 
 export interface Routes {

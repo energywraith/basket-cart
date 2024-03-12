@@ -1,6 +1,6 @@
 import { routes } from "@/consts";
 import { useAppMachine } from "@/context/AppMachineContext";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const useRouteGuard = () => {
@@ -8,6 +8,8 @@ const useRouteGuard = () => {
 
   const { state } = useAppMachine();
   const pathname = usePathname();
+
+  const router = useRouter();
 
   useEffect(() => {
     const routeStates = routes[pathname as keyof typeof routes]?.states;
@@ -23,7 +25,8 @@ const useRouteGuard = () => {
     );
 
     if (!isValidState) {
-      redirect("/");
+      router.push("/");
+      return;
     }
 
     setIsLoading(false);

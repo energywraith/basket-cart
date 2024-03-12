@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 interface UsePopStateProps {
-  onBack: () => void;
-  onForward: () => void;
+  onBack: (from: keyof typeof routes, to: keyof typeof routes) => void;
+  onForward: (from: keyof typeof routes, to: keyof typeof routes) => void;
 }
 
 const usePopstate = ({ onBack, onForward }: UsePopStateProps) => {
@@ -17,19 +17,20 @@ const usePopstate = ({ onBack, onForward }: UsePopStateProps) => {
 
   useEffect(() => {
     const handlePopstate = () => {
-      console.log(window.history);
+      const from = pathnameBeforePopstate.current;
+      const fromPageIndex = pathnames.indexOf(pathnameBeforePopstate.current);
 
-      const newPageIndex = pathnames.indexOf(location.pathname);
-      const oldPageIndex = pathnames.indexOf(pathnameBeforePopstate.current);
+      const to = location.pathname;
+      const toPageIndex = pathnames.indexOf(location.pathname);
 
-      const isForward = newPageIndex > oldPageIndex;
+      const isForward = toPageIndex > fromPageIndex;
 
       if (isForward) {
-        onForward();
+        onForward(from, to);
         return;
       }
 
-      onBack();
+      onBack(from, to);
     };
 
     window.addEventListener("popstate", handlePopstate);
