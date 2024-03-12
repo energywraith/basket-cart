@@ -2,7 +2,7 @@ import { Card } from "@/components/common/Card";
 import { paymentMethods, shippingMethods } from "@/consts";
 import { useAppMachine } from "@/context/AppMachineContext";
 
-const ShippingSummary = () => {
+const OrderDetailsSummary = () => {
   const { state } = useAppMachine();
 
   const shippingMethod = shippingMethods.find(
@@ -32,4 +32,4 @@ const ShippingSummary = () => {
   );
 };
 
-export { ShippingSummary };
+export { OrderDetailsSummary };

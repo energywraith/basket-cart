@@ -6,7 +6,7 @@ import { AddressSummary } from "@/components/templates/AddressSummary";
 import { CartSummary } from "@/components/templates/CartSummary";
 import { PaymentCard } from "@/components/templates/PaymentCard";
 import { PaymentForm } from "@/components/templates/PaymentForm";
-import { ShippingSummary } from "@/components/templates/ShippingSummary";
+import { OrderDetailsSummary } from "@/components/templates/OrderDetailsSummary";
 
 import { useAppMachine } from "@/context/AppMachineContext";
 import { PaymentMethod } from "@/context/AppMachineContext/types";
@@ -62,7 +62,7 @@ export default function Payment() {
             showCartItems
           />
           <AddressSummary />
-          <ShippingSummary />
+          <OrderDetailsSummary />
         </section>
       </section>
     </>
