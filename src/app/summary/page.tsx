@@ -41,7 +41,7 @@ export default function Summary() {
             )}
           </Card>
           <AddressSummary />
-          <OrderDetailsSummary />
+          <OrderDetailsSummary showPayment />
         </section>
         <section className="flex flex-col w-full md:max-w-sm gap-y-4">
           <CartSummary

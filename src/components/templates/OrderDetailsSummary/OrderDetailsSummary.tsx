@@ -2,7 +2,11 @@ import { Card } from "@/components/common/Card";
 import { paymentMethods, shippingMethods } from "@/consts";
 import { useAppMachine } from "@/context/AppMachineContext";
 
-const OrderDetailsSummary = () => {
+interface OrderDetailsSummaryProps {
+  showPayment?: boolean;
+}
+
+const OrderDetailsSummary = ({ showPayment }: OrderDetailsSummaryProps) => {
   const { state } = useAppMachine();
 
   const shippingMethod = shippingMethods.find(
@@ -19,12 +23,12 @@ const OrderDetailsSummary = () => {
       <ul className="mt-3 flex flex-col gap-y-2">
         <li className="flex justify-between">
           Shipping
-          <span>{shippingMethod}</span>
+          <span>{shippingMethod || "SKIPPED"}</span>
         </li>
-        {paymentMethod && (
+        {showPayment && (
           <li className="flex justify-between">
             Payment
-            <span>{paymentMethod}</span>
+            <span>{paymentMethod || "SKIPPED"}</span>
           </li>
         )}
       </ul>
