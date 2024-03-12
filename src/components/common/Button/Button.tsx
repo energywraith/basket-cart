@@ -1,5 +1,7 @@
+import { LoaderIcon } from "@/components/icons/LoaderIcon";
 import { classNames } from "@/utils/classnames";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { useFormStatus } from "react-dom";
 
 interface ButtonProps
   extends DetailedHTMLProps<
@@ -18,12 +20,22 @@ const variants = {
 const Button = ({
   children,
   className,
+  disabled,
   variant = "solid",
   ...props
 }: ButtonProps) => {
+  const { pending } = useFormStatus();
+
   return (
-    <button {...props} className={classNames(variants[variant], className)}>
-      {children}
+    <button
+      {...props}
+      disabled={disabled || pending}
+      className={classNames("relative", variants[variant], className)}
+    >
+      {pending && (
+        <LoaderIcon className="w-5 h-5 text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+      )}
+      <span className={classNames(pending && "opacity-0")}>{children}</span>
     </button>
   );
 };
