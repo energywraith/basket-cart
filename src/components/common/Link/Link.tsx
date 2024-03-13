@@ -11,8 +11,9 @@ interface LinkProps extends NextLinkProps {
 }
 
 const variants = {
-  text: "text-blue-600",
-  solid: "text-white p-2 px-4 rounded-sm text-center bg-blue-600",
+  text: "text-blue-600 hover:text-blue-500",
+  solid:
+    "text-white p-2 px-4 rounded-sm text-center bg-blue-600 hover:bg-blue-700 focus:ring-1 ring-blue-400",
 };
 
 const disabledVariants = {

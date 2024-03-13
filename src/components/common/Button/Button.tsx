@@ -13,9 +13,9 @@ interface ButtonProps
 }
 
 const variants = {
-  text: "text-blue-600 disabled:text-neutral-300",
+  text: "text-blue-600 disabled:text-neutral-300 hover:text-blue-500",
   solid:
-    "text-center bg-blue-600 text-white p-2 px-4 disabled:bg-neutral-300 rounded-sm",
+    "text-center bg-blue-600 hover:bg-blue-700 text-white p-2 px-4 disabled:bg-neutral-300 rounded-sm focus:ring-1 ring-blue-400",
 };
 
 const Button = ({
