@@ -51,6 +51,7 @@ export default function Home() {
           <CartSummary
             proceedTo="address"
             proceedText="Proceed to checkout"
+            changeStepOnProceed
             isProceedDisabled={state.context.products.length === 0}
           />
         </section>

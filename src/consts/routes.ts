@@ -9,7 +9,7 @@ export interface Routes {
 
 export const routes: Routes = {
   "/": { label: "Basket", states: ["cart"] },
-  "/address": { label: "Address", states: ["cart"] },
+  "/address": { label: "Address", states: ["address"] },
   "/shipment": {
     label: "Shipping",
     states: ["addressed"],

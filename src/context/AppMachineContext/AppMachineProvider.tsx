@@ -52,8 +52,21 @@ export const appMachine = createMachine(
       cart: {
         on: {
           NEXT_STEP: {
+            target: "address",
+            guard: and(["hasProducts"]),
+          },
+        },
+      },
+      // Added additional "address" state, so the route "/address" can be guarded on Machine Level
+      // Thus, the user has to have any products in his cart to proceed to "/address" form
+      address: {
+        on: {
+          NEXT_STEP: {
             target: "addressed",
-            guard: and(["isAddressValid", "hasProducts"]),
+            guard: and(["isAddressValid"]),
+          },
+          PREVIOUS_STEP: {
+            target: "cart",
           },
         },
       },
@@ -66,7 +79,7 @@ export const appMachine = createMachine(
             target: "shipping.skipped",
           },
           PREVIOUS_STEP: {
-            target: "cart",
+            target: "address",
           },
         },
       },
