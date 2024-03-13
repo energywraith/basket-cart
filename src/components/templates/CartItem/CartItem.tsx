@@ -27,10 +27,9 @@ const CartItem = ({ id, name, price, delivery, onDelete }: CartItemProps) => {
         {price.toFixed(2)} zł
       </h4>
       {onDelete && (
-        <TrashIcon
-          className="w-5 h-5 cursor-pointer hover:text-neutral-600"
-          onClick={() => onDelete(id)}
-        />
+        <button onClick={() => onDelete(id)}>
+          <TrashIcon className="w-5 h-5 cursor-pointer hover:text-neutral-600" />
+        </button>
       )}
     </Card>
   );
