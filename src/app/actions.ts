@@ -6,24 +6,40 @@ interface OnProcessCompleteResponse {
   success: boolean;
 }
 
+const errors = {
+  noAPIURL: "You need to provide `API_URL` enviroment variable.",
+  default: "Your order could not be completed.",
+};
+
 export async function onProcessComplete(
   data: AppMachineContext
 ): Promise<OnProcessCompleteResponse> {
   if (!process.env.API_URL) {
-    console.error("You need to provide `API_URL` enviroment variable.");
-    return { success: false };
+    throw new Error(errors.noAPIURL);
   }
 
-  const response = await fetch(process.env.API_URL, {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
+  try {
+    const response = await fetch(process.env.API_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
 
-  if (!response.ok) {
-    console.error(response);
+    if (!response.ok) {
+      throw new Error(`API: ${response.statusText}`);
+    }
+
+    const responseJSON = await response.json();
+
+    if (!responseJSON.success) {
+      throw new Error(errors.default);
+    }
+
+    return responseJSON;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+
+    throw errors.default;
   }
-
-  const responseJSON = await response.json();
-
-  return responseJSON;
 }
