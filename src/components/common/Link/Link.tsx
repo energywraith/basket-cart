@@ -7,11 +7,12 @@ interface LinkProps extends NextLinkProps {
   children?: ReactNode;
   className?: string;
   variant?: keyof typeof variants;
+  fitWidth?: boolean;
 }
 
 const variants = {
   text: "text-blue-600",
-  solid: "w-full text-white p-2 rounded-sm text-center bg-blue-600",
+  solid: "text-white p-2 px-4 rounded-sm text-center bg-blue-600",
 };
 
 const disabledVariants = {
@@ -24,6 +25,7 @@ const Link = ({
   disabled,
   className,
   variant = "solid",
+  fitWidth,
   ...props
 }: LinkProps) => {
   return (
@@ -32,6 +34,7 @@ const Link = ({
       className={classNames(
         variants[variant],
         disabled && disabledVariants[variant],
+        fitWidth ? "w-fit" : "w-full",
         className
       )}
     >

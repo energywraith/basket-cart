@@ -27,7 +27,7 @@ export default function Error({
         <p className="font-light text-md max-w-72 text-center mt-1">
           {error.message}
         </p>
-        <Link href="/" className="mt-6 w-fit px-4" onClick={reset}>
+        <Link href="/" className="mt-6" fitWidth onClick={reset}>
           Restart Shopping
         </Link>
       </Card>

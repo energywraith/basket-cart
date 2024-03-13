@@ -9,12 +9,13 @@ interface ButtonProps
     HTMLButtonElement
   > {
   variant?: keyof typeof variants;
+  fitWidth?: boolean;
 }
 
 const variants = {
   text: "text-blue-600 disabled:text-neutral-300",
   solid:
-    "w-full text-center bg-blue-600 text-white p-2 disabled:bg-neutral-300 rounded-sm",
+    "text-center bg-blue-600 text-white p-2 px-4 disabled:bg-neutral-300 rounded-sm",
 };
 
 const Button = ({
@@ -22,6 +23,7 @@ const Button = ({
   className,
   disabled,
   variant = "solid",
+  fitWidth,
   ...props
 }: ButtonProps) => {
   const { pending } = useFormStatus();
@@ -30,7 +32,12 @@ const Button = ({
     <button
       {...props}
       disabled={disabled || pending}
-      className={classNames("relative", variants[variant], className)}
+      className={classNames(
+        "relative",
+        variants[variant],
+        fitWidth ? "w-fit" : "w-full",
+        className
+      )}
     >
       {pending && (
         <LoaderIcon className="w-5 h-5 text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
