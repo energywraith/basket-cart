@@ -106,9 +106,7 @@ export const appMachine = createMachine(
           },
         },
       },
-      completed: {
-        type: "final",
-      },
+      completed: {},
     },
   },
   {

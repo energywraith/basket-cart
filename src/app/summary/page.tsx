@@ -1,8 +1,6 @@
 "use client";
 
 import { Card } from "@/components/common/Card";
-// State = payment.selected | payment.skipped
-
 import { AddressSummary } from "@/components/templates/AddressSummary";
 import { CartItem } from "@/components/templates/CartItem";
 import { CartSummary } from "@/components/templates/CartSummary";
@@ -11,6 +9,8 @@ import { useAppMachine } from "@/context/AppMachineContext";
 import { onProcessComplete } from "../actions";
 import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
+
+// State = payment.selected | payment.skipped
 
 export default function Summary() {
   const { state, states } = useAppMachine();
