@@ -52,7 +52,10 @@ const fields = [
 const schema: ObjectSchema<FieldValues> = object({
   name: string().defined().max(20).required(),
   price: number().defined().positive().required(),
-  delivery: string().defined().oneOf(Object.keys(delivery)).required(),
+  delivery: string()
+    .defined()
+    .oneOf(Object.keys(delivery))
+    .required("select one of above options"),
 });
 
 const CartForm = ({ onSubmit }: CartFormProps) => {

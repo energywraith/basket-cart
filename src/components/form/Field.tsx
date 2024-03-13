@@ -46,7 +46,7 @@ const Field = ({
   return (
     <div
       className={classNames(
-        "flex flex-col gap-y-2.5 items-center w-full justify-self-center",
+        "flex flex-col gap-y-2.5 items-start w-full justify-self-center",
         className
       )}
       style={{ maxWidth: width }}
@@ -60,7 +60,7 @@ const Field = ({
         {...inputProps}
       />
       <div
-        className={classNames("text-sm min-h-5 capitalize-first text-error")}
+        className={classNames("text-sm min-h-5 capitalize-first text-red-600")}
       >
         {error?.message as string}
       </div>
