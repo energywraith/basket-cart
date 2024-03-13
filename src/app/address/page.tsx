@@ -5,7 +5,7 @@ import { AddressCard } from "@/components/templates/AddressCard";
 import { AddressForm } from "@/components/templates/AddressForm";
 import { CartSummary } from "@/components/templates/CartSummary";
 import { useAppMachine } from "@/context/AppMachineContext";
-import { Address } from "@/context/AppMachineContext/types";
+import type { Address } from "@/context/AppMachineContext/types";
 import { useState } from "react";
 
 // State = cart, check if products.length > 0
