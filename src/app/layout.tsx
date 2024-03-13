@@ -25,7 +25,7 @@ export default function RootLayout({
         <AppMachineProvider>
           <RouteGuardProvider>
             <CartHeader />
-            <main className="mx-auto max-w-screen-xl px-6 flex min-h-screen flex-col gap-4 items-center py-12">
+            <main className="mx-auto max-w-screen-xl px-6 flex min-h-screen flex-col gap-4 items-center md:py-8 py-12">
               {children}
             </main>
           </RouteGuardProvider>

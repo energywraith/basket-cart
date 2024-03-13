@@ -27,7 +27,7 @@ const CartStepperItem = ({
     >
       <span className="flex items-center">
         {isCompleted && (
-          <CheckIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
+          <CheckIcon className="hidden md:block w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
         )}
         {step}
       </span>
