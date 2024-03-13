@@ -37,9 +37,9 @@ export type AppMachineActions =
     }
   | {
       type: "setShippingMethod";
-      address: ShippingMethod;
+      shippingMethod: ShippingMethod;
     }
   | {
       type: "setPaymentMethod";
-      address: PaymentMethod;
+      paymentMethod: PaymentMethod;
     };
