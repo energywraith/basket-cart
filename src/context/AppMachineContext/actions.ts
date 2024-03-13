@@ -1,5 +1,6 @@
 import { ActionFunctionMap, EventObject, ProvidedActor, assign } from "xstate";
 import { AppMachineActions, AppMachineContext } from "./types";
+import { initialContext } from "./AppMachineProvider";
 
 function assertEventType<TE extends EventObject, TType extends TE["type"]>(
   event: TE,
@@ -45,5 +46,8 @@ export const appMachineActions: ActionFunctionMap<
     return {
       paymentMethod: event.paymentMethod,
     };
+  }),
+  reset: assign(() => {
+    return initialContext;
   }),
 };

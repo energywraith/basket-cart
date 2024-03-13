@@ -24,6 +24,9 @@ export interface AppMachineContext {
 
 export type AppMachineActions =
   | {
+      type: "reset";
+    }
+  | {
       type: "addProduct";
       product: Product;
     }

@@ -6,6 +6,13 @@ import { and, createMachine } from "xstate";
 import { appMachineActions } from "./actions";
 import { AppMachineContext, AppMachineActions } from "./types";
 
+export const initialContext = {
+  products: [],
+  address: null,
+  shippingMethod: null,
+  paymentMethod: null,
+};
+
 export const appMachine = createMachine(
   {
     id: "app",
@@ -35,6 +42,10 @@ export const appMachine = createMachine(
       },
       SET_PAYMENT_METHOD: {
         actions: "setPaymentMethod",
+      },
+      RESET: {
+        target: ".cart",
+        actions: "reset",
       },
     },
     states: {

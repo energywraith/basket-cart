@@ -24,5 +24,11 @@ export const useAppMachine = () => {
     },
   };
 
-  return { actor, state, states };
+  const reset = () => {
+    actor.send({
+      type: "RESET",
+    });
+  };
+
+  return { actor, state, states, reset };
 };

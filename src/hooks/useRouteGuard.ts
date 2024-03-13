@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const useRouteGuard = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const { state } = useAppMachine();
+  const { state, reset } = useAppMachine();
   const pathname = usePathname();
 
   const router = useRouter();
@@ -25,6 +25,7 @@ const useRouteGuard = () => {
     );
 
     if (!isValidState) {
+      reset();
       router.push("/");
       return;
     }
