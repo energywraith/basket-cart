@@ -55,6 +55,7 @@ export default function Shipment() {
                 variant="text"
                 href="payment"
                 className="self-center"
+                fitWidth
                 onClick={onSkip}
               >
                 Skip Shipping Method

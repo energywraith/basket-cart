@@ -57,6 +57,7 @@ export default function Payment() {
                 variant="text"
                 href="summary"
                 className="self-center"
+                fitWidth
                 onClick={onSkip}
               >
                 Skip Payment Method
