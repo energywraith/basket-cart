@@ -42,7 +42,7 @@ export default function Home() {
               ))}
             </ul>
           )}
-          <Card className="flex flex-col gap-y-4">
+          <Card as="section" className="flex flex-col gap-y-4">
             <Card.Header as="h3">Add Product</Card.Header>
             <CartForm onSubmit={onAdd} />
           </Card>

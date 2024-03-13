@@ -31,7 +31,7 @@ export default function Summary() {
     <>
       <section className="flex flex-col md:flex-row w-full gap-4">
         <section className="flex-grow flex flex-col gap-4">
-          <Card>
+          <Card as="section">
             {state.context.products.length > 0 && (
               <ul className="flex flex-col gap-4">
                 {state.context.products.map((product) => (

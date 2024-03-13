@@ -16,7 +16,7 @@ const PaymentCard = ({ onChangeShipping }: PaymentCardProps) => {
   )?.label;
 
   return (
-    <Card className="flex flex-col gap-y-4">
+    <Card as="section" className="flex flex-col gap-y-4">
       <Card.Header as="h2">Payment Details</Card.Header>
       <h3>{paymentMethodLabel}</h3>
       <Button variant="text" className="self-start" onClick={onChangeShipping}>

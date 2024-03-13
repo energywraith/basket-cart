@@ -19,7 +19,7 @@ export default function Error({
 
   return (
     <section className="flex flex-col md:flex-row w-full gap-4">
-      <Card className="flex-grow flex flex-col items-center py-12">
+      <Card as="section" className="flex-grow flex flex-col items-center py-12">
         <CartCrossIcon className="w-24 h-24 text-red-700" />
         <h1 className="font-semibold text-lg mt-4">
           There was a problem with your order

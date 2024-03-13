@@ -16,7 +16,7 @@ const AddressCard = ({ onChangeAddress }: AddressCardProps) => {
     "";
 
   return (
-    <Card className="flex flex-col gap-y-4">
+    <Card as="section" className="flex flex-col gap-y-4">
       <Card.Header as="h2">Address Details</Card.Header>
       <ul className="flex flex-col gap-y-2">
         <li>{country}</li>

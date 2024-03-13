@@ -18,7 +18,7 @@ const OrderDetailsSummary = ({ showPayment }: OrderDetailsSummaryProps) => {
   )?.label;
 
   return (
-    <Card className="w-full">
+    <Card as="section" className="w-full">
       <Card.Header as="h3">Order Details</Card.Header>
       <ul className="mt-3 flex flex-col gap-y-2">
         <li className="flex justify-between">

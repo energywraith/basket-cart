@@ -12,7 +12,7 @@ export default function Completed() {
 
   return (
     <section className="flex flex-col md:flex-row w-full gap-4">
-      <Card className="flex-grow flex flex-col items-center py-12">
+      <Card as="section" className="flex-grow flex flex-col items-center py-12">
         <CartCheckIcon className="w-24 h-24 text-blue-600" />
         <h1 className="font-semibold text-lg mt-4">
           Your order has been placed

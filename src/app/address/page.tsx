@@ -32,7 +32,7 @@ export default function Address() {
       <section className="flex flex-col md:flex-row w-full gap-4">
         <section className="flex-grow flex flex-col gap-4">
           {!address || showForm ? (
-            <Card className="flex flex-col gap-y-4">
+            <Card as="section" className="flex flex-col gap-y-4">
               <Card.Header as="h2">Address Details</Card.Header>
               <AddressForm
                 onCancel={showForm ? () => setShowForm(false) : undefined}
